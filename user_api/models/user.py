@@ -86,8 +86,6 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     country = CountryField(
         verbose_name=_('Country'),
-        default='',
-        blank=True
     )
 
     genre = models.TextField(
