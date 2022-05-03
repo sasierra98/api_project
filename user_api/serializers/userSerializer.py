@@ -7,6 +7,11 @@ class UserSerializer(serializers.ModelSerializer):
     # name = serializers.CharField(
     #     max_length=255,
     # )
+    password = serializers.CharField(
+        style={'input_type': 'password'}
+    )
     class Meta:
         model = User
-        fields = ['name', 'email', 'identification', 'phone', 'cellphone', 'address', 'country', 'genre']
+        fields = ('id', 'name', 'password', 'email', 'identification', 'phone', 'cellphone', 'address', 'country', 'genre',
+                  'is_active', 'is_staff', 'is_customer')
+        
