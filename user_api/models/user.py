@@ -104,6 +104,11 @@ class User(AbstractBaseUser, PermissionsMixin):
         default=False
     )
 
+    is_customer = models.BooleanField(
+        verbose_name=_("It's a customer"),
+        default=False
+    )
+
     objects = CustomUserManager()
 
     USERNAME_FIELD = 'email'
@@ -122,7 +127,5 @@ class User(AbstractBaseUser, PermissionsMixin):
         return self.last_name
 
     def __str__(self):
-        return f'{self.first_name} {self.last_name} | {self.identification}'
-
-
-# Create your models here.
+        # return f'{self.first_name} {self.last_name} | {self.identification}'
+        return f'{self.name} | {self.identification}'
