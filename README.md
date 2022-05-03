@@ -1,2 +1,2 @@
 # api_project
-Django api
+Django rest framework api which allows to connect with an user model
