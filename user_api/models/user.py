@@ -84,8 +84,28 @@ class User(AbstractBaseUser, PermissionsMixin):
         blank=True
     )
 
-    country = CountryField(
+    country = models.ForeignKey(
+        to='cities_light.Country',
         verbose_name=_('Country'),
+        on_delete=models.CASCADE,
+        blank=True,
+        null=True
+    )
+
+    state = models.ForeignKey(
+        to='cities_light.Region',
+        verbose_name=_('State'),
+        on_delete=models.CASCADE,
+        blank=True,
+        null=True
+    )
+
+    city = models.ForeignKey(
+        to='cities_light.City',
+        verbose_name=_('City'),
+        on_delete=models.CASCADE,
+        blank=True,
+        null=True
     )
 
     genre = models.TextField(
