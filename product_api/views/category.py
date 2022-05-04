@@ -23,3 +23,34 @@ class CategoryView(APIView):
             return Response(serializer.data, status.HTTP_201_CREATED)
 
         return Response(status.HTTP_400_BAD_REQUEST)
+
+
+class DetailCategoryView(APIView):
+    serializer_class = CategorySerializer
+    category = Category.objects
+
+    def get(self, request, pk: int, format=None) -> Response:
+        serializer = self.serializer_class(self.category.get(pk=pk), many=False)
+        return Response(serializer.data)
+
+    def patch(self, request, pk: int) -> Response:
+        serializer = self.serializer_class(self.category.get(pk=pk), data=request.data, partial=True)
+
+        if serializer.is_valid():
+            serializer.save()
+            return Response(f'{request.data} Updated', status.HTTP_200_OK)
+
+        return Response(status.HTTP_400_BAD_REQUEST)
+
+    def put(self, request, pk: int) -> Response:
+        serializer = self.serializer_class(self.category.get(pk=pk), data=request.data)
+
+        if serializer.is_valid():
+            serializer.save()
+            return Response(f'{request.data} Updated', status.HTTP_200_OK)
+
+        return Response(status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, pk: int) -> Response:
+        self.category.get(pk=pk).delete()
+        return Response(status.HTTP_200_OK)
